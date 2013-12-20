@@ -1,0 +1,8 @@
+Guidelines
+
+method names should be camelCased
+use named hash parameters whenever a method takes more than one argument
+use longer, more descriptive methods names instead of crypic shorthand names
+	ex: listComments(fromtarget: target, afterDate: date), not
+	lscmmt(target, date)
+try to follow MVC
