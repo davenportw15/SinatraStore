@@ -3,7 +3,6 @@ require_relative '../Paths.rb'
 
 class Users
 	def initialize
-		puts(File.exists?(Paths.root + "/databases/store.db"))
 		@db = SQLite3::Database.new(Paths.root + "/databases/store.db")
 		@error = SQLite3::SQLException
 	end
