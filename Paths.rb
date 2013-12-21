@@ -2,8 +2,7 @@
 #uses class methods so that there is no need to instantiate it 
 class Paths
 	def self.root
-		Dir.pwd.match(/(.*)\/.*/)
-		return $1
+		Dir.pwd
 	end
 
 	def self.users
