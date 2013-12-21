@@ -26,12 +26,11 @@ class Users
 		end
 	end
 
-	#use the params hash to specify which fields in the database should be targeted
 	def getUserByUsername(username)
 		if userExists?(username)	
 			return @db.execute("select * from users where username=='#{username}'").map do |userData|
 				format(userData)
-			end.first #.first removes unnecessary embeddding of information in an array
+			end.first #.first removes unnecessary embeddding of data into an array
 		else
 			return false
 		end
