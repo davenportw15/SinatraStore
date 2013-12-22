@@ -1,10 +1,19 @@
 <html>
 	<head>
 		<title>New User</title>
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+		<style type="text/css">
+			input {
+				display: block;
+				margin-bottom: 10px;
+			}
+		</style>
 	</head>
 	<body>
+		<div class="titleContainer">
+				<h1 class="pageTitle">New User</h1>
+		</div>
 		<div class="container">
-			<h1>New User</h1>
 			<% if message %>
 				<h3 class="message"><%= message %></h3>
 			<% end %>

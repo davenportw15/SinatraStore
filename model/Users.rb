@@ -18,8 +18,9 @@ class Users
 		return formatted
 	end
 
+	#search is case insensitive
 	def userExists?(username)
-		if @db.execute("select username from users where username=='#{username}'").empty?
+		if @db.execute("select username from users where username=='#{username}' collate nocase").empty?
 			return false
 		else
 			return true
