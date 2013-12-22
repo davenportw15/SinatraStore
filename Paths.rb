@@ -2,7 +2,7 @@
 #uses class methods so that there is no need to instantiate it 
 class Paths
 	def self.root
-		Dir.pwd
+		return File.expand_path(File.dirname(__FILE__))
 	end
 
 	def self.users
