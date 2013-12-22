@@ -36,11 +36,11 @@ class Users
 		end
 	end
 
-	def newUser(username, password, firstname, lastname)
-		if userExists?(username)
+	def newUser(params = {username: nil, password: nil, firstname: nil, lastname: nil})
+		if userExists?(params[:username])
 			return false
 		else
-			@db.execute("insert into users ('username','password','firstname','lastname') values ('#{username}','#{password}','#{firstname}','#{lastname}')")
+			@db.execute("insert into users ('username','password','firstname','lastname') values ('#{params[:username]}','#{params[:password]}','#{params[:firstname]}','#{params[:lastname]}')")
 			return true
 		end
 	end

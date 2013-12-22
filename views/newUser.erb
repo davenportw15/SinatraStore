@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>New User</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>New User</h1>
+			<% if message %>
+				<h3 class="message"><%= message %></h3>
+			<% end %>
+			<form action="/newuser" method="post">
+				<input type="text" name="username" placeholder="Username" />
+				<input type="text" name="firstname" placeholder="First Name" />
+				<input type="text" name="lastname" placeholder="Last Name" />
+				<input type="password" name="password" placeholder="Password" />
+				<input type="password" name="passwordconfirmation" placeholder="Confirm Password" />
+				<input type="submit" value="Create User" />
+			</form>
+		</div>
+	</body>
+</html>
