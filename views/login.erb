@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Login</title>
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+	</head>
+	<body>
+		<div class="titleContainer">
+			<h1 class="pageTitle">Login</h1>
+		</div>
+		<div class="container">
+			<% if message %>
+				<h3 class="message"><%= message %></h3>
+			<% end %>
+			<form action="/login" method="post">
+				<input type="text" name="username" placeholder="Username" />
+				<input type="password" name="password" placeholder="Password" />
+				<input type="submit" value="Login" />
+			</form>
+		</div>
+	</body>
+</head>
