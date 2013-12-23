@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'digest/md5' # MD5 hash for the passwords
 require_relative 'Paths.rb'
 require Paths.users
 
@@ -24,7 +25,7 @@ end
 post "/newuser" do
 	if !params.values.include?("") #ensures all fields were completed
 		if params[:password] == params[:passwordconfirmation] #ensures passwords match
-			if users.newUser(username: params[:username], password: params[:password], firstname: params[:firstname], lastname: params[:lastname]) #tries creating user	
+			if users.newUser(username: params[:username], password: Digest::MD5.hexdigest(params[:password]), firstname: params[:firstname], lastname: params[:lastname]) #tries creating user	
 				session[:user] = users.getUserByUsername(params[:username])
 				"User Created" #add: redirect to user page
 			else
@@ -44,7 +45,7 @@ end
 
 post "/login" do
 	if users.userExists?(params[:username])
-		if params[:password] == users.getUserByUsername(params[:username])[:password]
+		if Digest::MD5.hexdigest(params[:password]) == users.getUserByUsername(params[:username])[:password]
 			session[:user] = users.getUserByUsername(params[:username])
 			redirect "/user/#{params[:username]}"
 		else
