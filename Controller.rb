@@ -18,6 +18,10 @@ helpers do
 	end
 end
 
+not_found do
+	erb :pageNotFound
+end
+
 get "/newuser" do
 	erb :newUser, :locals => {message: nil}
 end
@@ -63,13 +67,13 @@ end
 
 #this does nothing useful now, needs improvement
 get "/user/:username" do
-	if loggedIn?
-		if params[:username] == session[:user][:username]
-			"#{session[:user]}"
+	if users.userExists?(params[:username])
+		if  loggedIn? and params[:username] == session[:user][:username] #order is important here. If loggedIn? is false, the second condition will not be tested. This is what we want, since session[:user] may be nil if !loggedIn?, resulting in a 'method not found' error.
+			erb :user, :locals => {currentUser: true}
 		else
-			"Do something" #improve
+			erb :user, :locals => {currentUser: false}
 		end
 	else
-		"Do something else" #improve
+		"User does not exist." #improve
 	end
 end
