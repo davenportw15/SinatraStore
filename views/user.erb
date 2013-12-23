@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title><%= params[:username] %></title>
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+	</head>
+	<body>
+		<div class="titleContainer">
+			<h1 class="pageTitle"><%= params[:username] %></h1>
+		</div>
+		<%if currentUser %>
+			<!-- user administrative actions go here -->
+		<% end %>
+		<div class="container">
+			<p>Needs content</p>
+		</div>
+	</body>
+</html>
