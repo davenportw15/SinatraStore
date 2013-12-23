@@ -17,6 +17,10 @@ helpers do
 	end
 end
 
+not_found do
+	erb :pageNotFound
+end
+
 get "/newuser" do
 	erb :newUser, :locals => {message: nil}
 end
