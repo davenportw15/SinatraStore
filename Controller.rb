@@ -1,6 +1,7 @@
 require 'sinatra'
 require_relative 'Paths.rb'
 require Paths.users
+require Paths.partials
 
 users = Users.new
 
@@ -13,6 +14,13 @@ helpers do
 			return false
 		else
 			return true
+		end
+	end
+
+	def partial(name, params = {})
+		case name
+		when "navigation"
+			return Partials.navigation(params)
 		end
 	end
 end

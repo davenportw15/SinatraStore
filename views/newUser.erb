@@ -11,7 +11,8 @@
 	</head>
 	<body>
 		<div class="titleContainer">
-				<h1 class="pageTitle">New User</h1>
+			<h1 class="pageTitle">New User</h1>
+			<%= partial("navigation", default: (loggedIn?) ? session[:user][:username] : false) %>
 		</div>
 		<div class="container">
 			<% if message %>

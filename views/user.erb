@@ -6,6 +6,7 @@
 	<body>
 		<div class="titleContainer">
 			<h1 class="pageTitle"><%= params[:username] %></h1>
+			<%= partial("navigation", default: (loggedIn?) ? session[:user][:username] : false) %>
 		</div>
 		<%if currentUser %>
 			<!-- user administrative actions go here -->

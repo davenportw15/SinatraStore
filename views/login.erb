@@ -6,6 +6,7 @@
 	<body>
 		<div class="titleContainer">
 			<h1 class="pageTitle">Login</h1>
+			<%= partial("navigation", default: (loggedIn?) ? session[:user][:username] : false) %>
 		</div>
 		<div class="container">
 			<% if message %>

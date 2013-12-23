@@ -9,6 +9,10 @@ class Paths
 		return self.root + "/model/Users.rb"
 	end
 
+	def self.partials
+		return self.root + "/model/Partials.rb"
+	end
+
 	def self.database
 		return self.root + "/databases/store.db"
 	end
