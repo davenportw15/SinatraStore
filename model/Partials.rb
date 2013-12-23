@@ -15,7 +15,7 @@ class Partials
 		
 		links = ""
 		params.each do |text, link|
-			links += "<a href='#{link}'><span class='navigationLink'>#{text}</span></a>"
+			links += "<span class='navigationSpan'><a href='#{link}' class='navigationLink'>#{text}</a></span>"
 		end
 		
 		div = "<div id='navigation'>#{links}</div>"		
