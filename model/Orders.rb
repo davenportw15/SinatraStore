@@ -41,20 +41,35 @@ class Orders
 	end
 
 	#more sorting options should be added
-	def getOrdersByUsername(username, params = {atTop: "earliest"})
+	#must give value for every parameter, even if it is default
+	def getOrdersByUsername(username, params = {atTop: "earliest", showOnlyNotCompleted: true})
 		if @users.userExists?(username) and params[:atTop] == "earliest"
 			orders = []
-			@db.execute("select * from orders where username=='#{username}' order by date_ordered asc").each do |order|
-				orders.push(format(order))
+			if params[:showOnlyNotCompleted]
+				@db.execute("select * from orders where username=='#{username}' and status!='completed' order by date_ordered asc").each do |order|
+                                	orders.push(format(order))
+				end
+			else
+				@db.execute("select * from orders where username=='#{username}' order by date_ordered asc").each do |order|
+					orders.push(format(order))
+				end
 			end
+			puts(params)
 			return orders
-		elsif @users.userExists?(username) and params[:atTop] == "lastest"
+		elsif @users.userExists?(username) and params[:atTop] == "latest"
 			orders = []
-                        @db.execute("select * from orders where username=='#{username}' order by date_ordered desc").each do |order|
-                                orders.push(format(order))
+			if params[:showOnlyNotCompleted]
+				@db.execute("select * from orders where username=='#{username}' and status!='completed' order by date_ordered desc").each do |order|
+                                         orders.push(format(order))
+                                end
+			else
+                        	@db.execute("select * from orders where username=='#{username}' order by date_ordered desc").each do |order|
+                        	       	 orders.push(format(order))
+				end
                         end
                         return orders
 		else
+			puts(params)
 			return false
 		end
 	end
