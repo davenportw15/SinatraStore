@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>New Product</title>
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+		<style type="text/css">
+			input, textarea {
+				display: block;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="titleContainer">
+			<h1 class="pageTitle">New Product</h1>
+			<%= partial("navigation", default: (loggedIn?) ? session[:user][:username] : false) %>
+		</div>
+		<div class="container">
+			<% if message %>
+				<h3 class="message"><%= message %></h3>
+			<% end %>
+			<form action="/products/new" method="post">
+				<input type="text" name="title" placeholder="Product Title" />
+				<input type="text" name="image" placeholder="Product Image" />
+				<textarea name="description" placeholder="Description"></textarea>
+				<input type="submit" value="Create Product" />
+			</form>
+		</div>
+	</body>
+</html>

@@ -2,14 +2,20 @@ require 'sinatra'
 require 'digest/md5' # MD5 hash for the passwords
 require_relative 'Paths.rb'
 require Paths.users
+require Paths.products
 require Paths.partials
 
 users = Users.new
+products = Products.new
 
 enable :sessions
 set :session_secret, "open source cola"
 
 helpers do
+	def paths
+		return Paths
+	end
+
 	def loggedIn?
 		if session.nil? || session[:user].nil?
 			return false
@@ -23,6 +29,32 @@ helpers do
 		when "navigation"
 			return Partials.navigation(params)
 		end
+	end
+
+	#must add name to administrators and remove before every push while in development
+	def administratorLoggedIn?
+		administrators = ["davenportw15"]
+		if loggedIn? and administrators.include?(session[:user][:username])
+			return true
+		else
+			return false
+		end
+	end
+
+	def format(params = {string: "", target: "database"})
+		case params[:target]
+		when "database"
+			params[:string].gsub!('"', "*d*")
+			params[:string].gsub!("'", "*s*")
+		when "url"
+			params[:string].gsub!(" ","_")
+			params[:string].gsub!("*d*", '"')
+			params[:string].gsub!("*s*", "'")
+		when "view"
+			params[:string].gsub!("*d*", '"')
+			params[:string].gsub!("*s*", "'")
+		end
+		return params[:string]
 	end
 end
 
@@ -84,4 +116,25 @@ get "/user/:username" do
 	else
 		"User does not exist." #improve
 	end
+end
+
+get "/products/new" do
+	if administratorLoggedIn?
+		erb :newProduct
+	else
+		"You do not have access to this page" #make prettier
+	end
+end
+
+post "/products/new" do
+	if administratorLoggedIn?
+		if params.values.include?(nil) or params.values.include?("")
+			erb :newProduct, :locals => {message: "Complete all forms before submitting product"}
+		else
+			products.newProduct(title: format(string: params[:title], target: "database"), description: format(string: params[:description], target: "database"), image: params[:image])
+			"Product created" #make prettier
+		end
+	else
+		"You do not have access to this page" #make prettier
+	end	
 end
