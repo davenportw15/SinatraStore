@@ -13,6 +13,10 @@ class Paths
 		return self.root + "/model/Partials.rb"
 	end
 
+	def self.products
+		return self.root + "/model/Products.rb"
+	end
+
 	def self.database
 		return self.root + "/databases/store.db"
 	end
