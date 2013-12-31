@@ -120,7 +120,7 @@ end
 
 get "/products/new" do
 	if administratorLoggedIn?
-		erb :newProduct
+		erb :newProduct, :locals => {message: nil}
 	else
 		"You do not have access to this page" #make prettier
 	end
